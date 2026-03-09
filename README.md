@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Copywriter Generator
+
+AI-powered copywriting tool that generates marketing content for multiple platforms using LLM.
+
+## Features
+
+- **Multi-platform Support**: Generate content for Twitter, Instagram, LinkedIn, Facebook, and more
+- **AI-Powered**: Uses LLM APIs (OpenAI, Gemini, DeepSeek, etc.) for intelligent content generation
+- **User Authentication**: Secure login/register with Supabase
+- **History Management**: Save and manage generated content history
+- **Multi-language**: Support for English and Chinese
+- **Theme Support**: Dark and light mode
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **UI**: React 19, Radix UI, Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **AI**: OpenAI compatible APIs (configurable)
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Configure environment variables:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# LLM API
+AI_API_KEY=your_api_key
+AI_API_ENDPOINT=your_endpoint
+AI_MODEL_NAME=your_model_name
+AI_API_FORMAT=openai  # or gemini
+```
 
-## Learn More
+3. Set up Supabase database:
 
-To learn more about Next.js, take a look at the following resources:
+Run the SQL commands in `supabase.sql` in your Supabase dashboard.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev
+```
 
-## Deploy on Vercel
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+├── app/                    # Next.js app router pages
+│   ├── api/               # API routes
+│   │   ├── (auth)/        # Auth API (login, register, logout)
+│   │   └── (dashboard)/   # Dashboard API (generate, history)
+│   ├── dashboard/         # Dashboard page
+│   └── page.tsx           # Landing page
+├── components/            # React components
+│   ├── common/            # Shared components
+│   ├── dashboard/         # Dashboard components
+│   ├── login/             # Login page components
+│   ├── ui/                # UI components (Radix-based)
+│   └── welcome/            # Landing page components
+├── contexts/              # React contexts
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utility libraries
+│   ├── supabase/          # Supabase clients
+│   └── llm-client.ts      # LLM API client
+├── services/             # Business logic services
+└── types/                # TypeScript type definitions
+```
+
+## License
+
+MIT
